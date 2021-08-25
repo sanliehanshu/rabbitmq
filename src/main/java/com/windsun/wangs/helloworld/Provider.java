@@ -1,8 +1,7 @@
-package com.windsun.wangs.rabbitmq;
+package com.windsun.wangs.helloworld;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 import com.windsun.wangs.util.RabbitMqUtil;
 import org.junit.Test;

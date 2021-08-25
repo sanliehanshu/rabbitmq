@@ -1,4 +1,4 @@
-package com.windsun.wangs.rabbitmq;
+package com.windsun.wangs.helloworld;
 
 import com.rabbitmq.client.*;
 import com.windsun.wangs.util.RabbitMqUtil;

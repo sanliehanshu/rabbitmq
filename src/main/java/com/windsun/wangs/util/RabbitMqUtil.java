@@ -21,14 +21,14 @@ public class RabbitMqUtil {
     static {
         connectionFactory = new ConnectionFactory();
         // 设置连接rabbitmq主机
-        connectionFactory.setHost("192.168.121.128");
+        connectionFactory.setHost("192.168.146.128");
         // 设置端口号
         connectionFactory.setPort(5672);
         // 设置连接的虚拟主机
-        connectionFactory.setVirtualHost("/ems");
+        connectionFactory.setVirtualHost("/");
         // 设置用户和密码
-        connectionFactory.setUsername("ems");
-        connectionFactory.setPassword("ems");
+        connectionFactory.setUsername("admin");
+        connectionFactory.setPassword("admin");
     }
 
     public static Connection getConnection() {
