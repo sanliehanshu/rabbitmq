@@ -1,4 +1,4 @@
-package com.windsun.wangs.workquene;
+package com.windsun.wangs.direct;
 
 import com.rabbitmq.client.*;
 import com.windsun.wangs.util.RabbitMqUtil;
@@ -6,22 +6,22 @@ import com.windsun.wangs.util.RabbitMqUtil;
 import java.io.IOException;
 
 /**
- * @ClassName : Customer
- * @Description : work quene
- * @Author : ws
- * @Date: 2021-08-25 16:41
- * @Version 1.0
+ * @Author：wangsheng
+ * @Description：
+ * @Date：2021/8/25 22:13
  */
-public class Customer2 {
-
+public class DirectCustomer2 {
     public static void main(String[] args) throws IOException {
         Connection connection = RabbitMqUtil.getConnection();
         Channel channel = connection.createChannel();
-        // 消息每次只消费一个消息
-        channel.basicQos(1);
-        channel.queueDeclare("work",true,false,false,null);
-        // 关闭消息自动确认
-        channel.basicConsume("work",false,new DefaultConsumer(channel){
+        channel.exchangeDeclare("logs_direct","direct");
+
+        String queue = channel.queueDeclare().getQueue();
+        channel.queueBind(queue,"logs_direct","info");
+        channel.queueBind(queue,"logs_direct","error");
+        channel.queueBind(queue,"logs_direct","debug");
+        channel.queueBind(queue,"logs_direct","warning");
+        channel.basicConsume(queue,true,new DefaultConsumer(channel){
             /**
              * No-op implementation of {@link Consumer#handleDelivery}.
              *
@@ -33,13 +33,11 @@ public class Customer2 {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 super.handleDelivery(consumerTag, envelope, properties, body);
-                System.out.println("消费者-2  "+new String(body));
-                // 消息的手动确认
-                // 1.确认队列中具体的哪个消息
-                // 2.是否开启多个消息同时确认
-                channel.basicAck(envelope.getDeliveryTag(),false);
+                System.out.println("消费结果："+new String(body));
             }
         });
+
+
 
     }
 }

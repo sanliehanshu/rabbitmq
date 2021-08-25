@@ -13,7 +13,7 @@ import java.io.IOException;
  * @Date: 2021-08-25 16:20
  * @Version 1.0
  */
-public class Provider {
+public class WorkqueneProvider {
 
     public static void main(String[] args) throws IOException {
         // 获取连接对象

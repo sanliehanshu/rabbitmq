@@ -12,7 +12,7 @@ import java.io.IOException;
  * @Date: 2021-08-25 16:41
  * @Version 1.0
  */
-public class Customer1 {
+public class WorkqueneCustomer2 {
 
     public static void main(String[] args) throws IOException {
         Connection connection = RabbitMqUtil.getConnection();
@@ -33,12 +33,7 @@ public class Customer1 {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 super.handleDelivery(consumerTag, envelope, properties, body);
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("消费者-1  "+new String(body));
+                System.out.println("消费者-2  "+new String(body));
                 // 消息的手动确认
                 // 1.确认队列中具体的哪个消息
                 // 2.是否开启多个消息同时确认
