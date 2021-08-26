@@ -35,4 +35,22 @@ public class RabbitMqTest {
             rabbitTemplate.convertAndSend("work", "work 模型: " + i + "  " + System.currentTimeMillis());
         }
     }
+
+    // fanout
+    @Test
+    public void fanout() {
+        rabbitTemplate.convertAndSend("logs", "","fanout: " + System.currentTimeMillis());
+    }
+
+    // direct
+    @Test
+    public void direct() {
+        rabbitTemplate.convertAndSend("directs", "info","direct: " + System.currentTimeMillis());
+    }
+
+    // topic 动态路由 订阅模式
+    @Test
+    public void topic() {
+        rabbitTemplate.convertAndSend("topics", "order","topic order 路由消息: " + System.currentTimeMillis());
+    }
 }
