@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
+import java.util.Map;
 
 /**
  * @ClassName : SpringRabbitmqListener
@@ -96,5 +97,15 @@ public class SpringRabbitmqListener {
     ))
     public void listenerTopicQueue2(String msg) {
         System.out.println("topic.queue2的消息为：" + msg);
+    }
+
+    /**
+     * 使用map接受结果
+     * @param map
+     * @throws InterruptedException
+     */
+    @RabbitListener(queues = "object.queue")
+    public void listenerObjecteQueue(Map map) throws InterruptedException {
+        System.out.println("消费者接收到的object.queue的消息为：" + map + LocalTime.now());
     }
 }

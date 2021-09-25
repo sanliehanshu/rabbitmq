@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName : SpringbootAMQPTests
@@ -97,6 +99,20 @@ public class SpringbootAMQPTests {
         String message = "中国消息，" + DateUtil.now();
 
         // 发消息
-        rabbitTemplate.convertAndSend(exchangeName, "jpeans.news", message);
+        rabbitTemplate.convertAndSend(exchangeName, ".news", message);
+    }
+
+    /**
+     * 测试发送对象
+     */
+    @Test
+    public void testSendObject() {
+        // 消息
+        Map<String, Object> map = new HashMap<>();
+        map.put("name","王升");
+        map.put("age",18);
+        map.put("date",DateUtil.now());
+        // 发消息
+        rabbitTemplate.convertAndSend("object.queue", map);
     }
 }
