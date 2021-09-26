@@ -1,24 +1,19 @@
-package com.windsun.amqp;
+package com.windsun.amqp.config;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * @ClassName : PublisherApplication
+ * @ClassName : JsonConfig
  * @Description :
  * @Author : ws
- * @Date: 2021-09-23 17:16
+ * @Date: 2021-09-26 18:00
  * @Version 1.0
  */
-@SpringBootApplication
-public class PublisherApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(PublisherApplication.class,args);
-    }
+@Configuration
+public class JsonConfig {
 
     /**
      * 使用Jackson序列化对象

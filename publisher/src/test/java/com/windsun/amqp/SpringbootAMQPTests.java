@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName : SpringbootAMQPTests
@@ -47,8 +49,70 @@ public class SpringbootAMQPTests {
         String queueName = "simple.queue";
         for (int i = 0; i < 50; i++) {
             String message = RandomUtil.randomString(10) + DateUtil.now();
-            rabbitTemplate.convertAndSend(queueName, message + "，编号：" + i+"，");
+            rabbitTemplate.convertAndSend(queueName, message + "，编号：" + i + "，");
             Thread.sleep(20);
         }
+    }
+
+    /**
+     * 订阅模式 fanout
+     */
+    @Test
+    public void testSendFanoutExchange() {
+
+        // 定义交换机名称
+        String exchangeName = "fanout.exchange";
+
+        // 消息
+        String message = "hello，everyone，" + DateUtil.now();
+
+        // 发消息
+        rabbitTemplate.convertAndSend(exchangeName, "", message);
+    }
+
+    /**
+     * direct routingKey
+     */
+    @Test
+    public void testSendDirectExchange() {
+
+        // 定义交换机名称
+        String exchangeName = "direct.exchange";
+
+        // 消息
+        String message = "hello，yellow，" + DateUtil.now();
+
+        // 发消息
+        rabbitTemplate.convertAndSend(exchangeName, "yellow", message);
+    }
+
+    /**
+     * topic routingKey
+     */
+    @Test
+    public void testSendTopicExchange() {
+
+        // 定义交换机名称
+        String exchangeName = "topic.exchange";
+
+        // 消息
+        String message = "中国消息，" + DateUtil.now();
+
+        // 发消息
+        rabbitTemplate.convertAndSend(exchangeName, ".news", message);
+    }
+
+    /**
+     * 测试发送对象
+     */
+    @Test
+    public void testSendObject() {
+        // 消息
+        Map<String, Object> map = new HashMap<>();
+        map.put("name","王升");
+        map.put("age",18);
+        map.put("date",DateUtil.now());
+        // 发消息
+        rabbitTemplate.convertAndSend("object.queue", map);
     }
 }
