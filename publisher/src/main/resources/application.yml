@@ -1,11 +1,13 @@
 spring:
   rabbitmq:
 #    host: 101.34.65.221 # rabbitMQ的ip地址
-    host: 192.168.121.128 # rabbitMQ的ip地址
+#    host: 192.168.121.128 # rabbitMQ的ip地址
+    host: 192.168.146.128 # rabbitMQ的ip地址
     port: 5672 # 端口
     username: admin
     password: admin
     virtual-host: /
-    listener:
-      simple:
-        prefetch: 1
+    publisher-confirm-type: correlated #correlated：异步回调，定义ConfirmCallback，mq返回结果时会调用CC; simple：同步等待confirm结果，知道超时
+    publisher-returns: true #开启publisher-returns功能，同样基于callback机制，不过是自定义的ReturnCallback
+    template:
+      mandatory: true # 定义消息路由失败时的策略。true：调用ReturnCallback；false：直接丢弃消息

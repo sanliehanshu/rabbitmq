@@ -1,7 +1,8 @@
 spring:
   rabbitmq:
 #    host: 101.34.65.221 # rabbitMQ的ip地址
-    host: 192.168.121.128 # rabbitMQ的ip地址
+#    host: 192.168.121.128 # rabbitMQ的ip地址
+    host: 192.168.146.128 # rabbitMQ的ip地址
     port: 5672 # 端口
     username: admin
     password: admin
