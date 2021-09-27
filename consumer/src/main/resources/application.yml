@@ -1,7 +1,19 @@
+
 spring:
   rabbitmq:
-    host: 192.168.121.128 # rabbitMQ的ip地址
+#    host: 192.168.121.128 # rabbitMQ的ip地址
+    host: 192.168.146.128 # rabbitMQ的ip地址
     port: 5672 # 端口
     username: admin
     password: admin
     virtual-host: /
+    listener:
+      simple:
+        prefetch: 1
+        acknowledge-mode: auto # mq自动处理，失败了一直重试
+        retry:
+          enabled: true # 开启失败重试机制
+          initial-interval: 1000 #初次失败重试等待时长为1s
+          multiplier: 3 # 下次失败的等待时长倍数
+          max-attempts: 4 #最大重试次数
+          stateless: true #true 无状态，false有状态。如果业务包含事务，这里改为false

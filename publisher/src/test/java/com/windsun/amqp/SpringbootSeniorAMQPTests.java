@@ -48,4 +48,12 @@ public class SpringbootSeniorAMQPTests {
         // 发送消息
         rabbitTemplate.convertAndSend("amq.topic", "5554simple.test", message, correlationData);
     }
+
+    @Test
+    public void testDurableMessage(){
+        //Message message = MessageBuilder.withBody("hello,spring".getBytes(StandardCharsets.UTF_8))
+        //        .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+        //        .build();
+        rabbitTemplate.convertAndSend("simple.queue",RandomUtil.randomString(10));
+    }
 }
