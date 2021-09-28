@@ -17,7 +17,7 @@ public class SpringRabbitmqListener {
 
     @RabbitListener(queues = "simple.queue")
     public void listenerSimpleQueue(String msg){
-        log.debug("消费者接收到的simple.queue的消息为："+msg);
+        log.info("消费者接收到的simple.queue的消息为："+msg);
         System.out.println(1/0);
         log.info("消息消费者处理成功");
     }
