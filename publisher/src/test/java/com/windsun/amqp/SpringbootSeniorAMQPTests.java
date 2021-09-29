@@ -56,4 +56,16 @@ public class SpringbootSeniorAMQPTests {
         //        .build();
         rabbitTemplate.convertAndSend("simple.queue",RandomUtil.randomString(10));
     }
+
+    /**
+     * 发送延迟消息
+     */
+    @Test
+    public void testTTLMessage(){
+        //Message message = MessageBuilder.withBody("hello,spring".getBytes(StandardCharsets.UTF_8))
+        //        .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+        //        .build();
+        rabbitTemplate.convertAndSend("ttl.direct","ttl",RandomUtil.randomString(10));
+        log.info("消息发送成功");
+    }
 }
