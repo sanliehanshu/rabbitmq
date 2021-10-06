@@ -22,7 +22,7 @@ public class TTLMessageConfig {
     public Queue ttlQueue(){
         return QueueBuilder
                 .durable("ttl.queue")
-                .ttl(10000)
+                .ttl(1000)
                 .deadLetterExchange("dl.direct")
                 .deadLetterRoutingKey("dl")
                 .build();

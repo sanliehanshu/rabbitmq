@@ -32,6 +32,10 @@ public class CommonConfig implements ApplicationContextAware {
          * @param routingKey the routing key.
          */
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
+            // 判断消息是否是延迟消息
+            if (message.getMessageProperties().getReceivedDelay() > 0) {
+                return;
+            }
             // 记录日志
             log.error("消息发送到队列失败，响应码：{}，失败原因：{}，交换机：{}，路由key：{}，消息：{}"
                     , replyCode, replyText, exchange, routingKey, message.toString());

@@ -1,8 +1,5 @@
 package com.windsun.amqp.config;
 
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -19,8 +16,8 @@ public class JsonConfig {
      * 使用Jackson序列化对象
      * @return
      */
-    @Bean
+ /*   @Bean
     public MessageConverter jsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
-    }
+    }*/
 }

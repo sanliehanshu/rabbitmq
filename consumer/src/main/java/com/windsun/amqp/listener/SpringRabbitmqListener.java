@@ -38,4 +38,17 @@ public class SpringRabbitmqListener {
     }
 
 
+    /**
+     * 声明延迟队列
+     * @param msg
+     */
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "delay.queue",durable = "true"),
+            exchange = @Exchange(name = "delay.direct",delayed = "true"),
+            key = "delay"))
+    public void listenerDelayedQueue(String msg) {
+        log.info("接收到delay.queue的延迟消息为：" + msg);
+    }
+
+
 }
