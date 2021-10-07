@@ -101,4 +101,37 @@ public class SpringbootSeniorAMQPTests {
         rabbitTemplate.convertAndSend("delay.direct","delay",message,correlationData);
         log.info("delay消息发送成功");
     }
+
+
+    /**
+     * 惰性队列发消息测试
+     */
+    @Test
+    public void testLazyMessage(){
+
+        for (int i = 0; i < 1000000; i++) {
+            Message message = MessageBuilder.withBody(RandomUtil.randomString(10).getBytes(StandardCharsets.UTF_8))
+                    .setDeliveryMode(MessageDeliveryMode.NON_PERSISTENT)
+                    .build();
+
+            // 消息ID，需要封装到CorrelationData
+            rabbitTemplate.convertAndSend("lazy.queue",message);
+        }
+    }
+
+    /**
+     * 普通队列发消息测试
+     */
+    @Test
+    public void testNormalMessage(){
+
+        for (int i = 0; i < 1000000; i++) {
+            Message message = MessageBuilder.withBody(RandomUtil.randomString(10).getBytes(StandardCharsets.UTF_8))
+                    .setDeliveryMode(MessageDeliveryMode.NON_PERSISTENT)
+                    .build();
+
+            // 消息ID，需要封装到CorrelationData
+            rabbitTemplate.convertAndSend("normal.queue",message);
+        }
+    }
 }
